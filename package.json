@@ -8,7 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carnivalgoblin/myFlix-client.git"
+    "url": "git+https://github.com/carnivalgoblin/myFlix-client.git",
+    "start": "parcel",
+    "watch": "parcel watch",
+    "build": "parcel build"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +22,8 @@
   "dependencies": {
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "sass": "^1.52.1"
   }
 }
