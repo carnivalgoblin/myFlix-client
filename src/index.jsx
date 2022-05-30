@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import { createElement } from 'react/cjs/react.production.min';
 
 // Import statement to indicate that you need to bundle `./index.scss`
@@ -20,4 +20,4 @@ class MyFlixApplication extends React.Component {
 const container = document.getElementsByClassName('app-container')[0];
 
 // Tells React to render ypur app in the root DOM element
-ReactDOM.render(React,createElement(MyFlixApplication), container);
+ReactDOM.render(React.createElement(MyFlixApplication), container);
