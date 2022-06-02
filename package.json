@@ -19,20 +19,14 @@
   },
   "homepage": "https://github.com/carnivalgoblin/myFlix-client#readme",
   "dependencies": {
+    "parcel": "^2.6.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
-  "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "buffer": "^6.0.3",
-    "parcel": "^2.6.0",
-    "parcel-bundler": "^1.12.5",
-    "process": "^0.11.10",
-    "sass": "^1.52.1"
-  },
   "alias": {
     "process": false
+  },
+  "devDependencies": {
+    "sass": "^1.52.1"
   }
 }
