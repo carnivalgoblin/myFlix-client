@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { RegistrationView } from '../registration-view/registration-view';
+
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
+  const [ registered, setRegistered] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +15,8 @@ export function LoginView(props) {
     // then call props.onLoggedIn(username)
     props.onLoggedIn(username);
   };
-
+  
+  if (registered) {
   return (
     <form>
       <label>
@@ -24,9 +28,14 @@ export function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Submit</button>
-      <button type="button">Not registered yet? Click here.</button>
+      <button type="button" onClick={() => setRegistered((registrationStatus) => !registrationStatus)}>Not registered yet? Click here.</button>
     </form>
   );
+} else if (!registered) {
+  return (
+   <RegistrationView />
+  )
+}
 }
 
 LoginView.propTypes = {
