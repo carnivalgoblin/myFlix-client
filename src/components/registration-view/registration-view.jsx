@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,7 +12,12 @@ export function RegistrationView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
-    props.onRegister(false);
+    props.onRegister(true);
+  };
+
+  const handleAlreadyRegistered = (e) => {
+    e.preventDefault();
+    props.onRegister(true);
   };
 
   return (
@@ -35,6 +39,7 @@ export function RegistrationView(props) {
         <input type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Register</button>
+      <button type="submit" onClick={handleAlreadyRegistered}>Already registered? Click here</button>
     </form>
   );
 }
