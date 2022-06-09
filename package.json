@@ -5,7 +5,8 @@
   "default": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel ./src/index.html"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
@@ -25,10 +26,13 @@
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "buffer": "^6.0.3",
+    "parcel": "^2.6.0",
     "parcel-bundler": "^1.12.5",
+    "process": "^0.11.10",
     "sass": "^1.52.1"
   },
   "alias": {
     "process": false
- }
+  }
 }
