@@ -27203,7 +27203,8 @@ class MainView extends (0, _reactDefault.default).Component {
             columnNumber: 29
         }, this);
         if (!user1) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-            onLoggedIn: (user)=>this.onLoggedIn(user)
+            onLoggedIn: (user)=>this.onLoggedIn(user),
+            onRegister: (registered)=>this.onRegister(registered)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 56,
@@ -31645,7 +31646,8 @@ function LoginView(props) {
 _s(LoginView, "9FY2cPL9VBDmuhjwpF2ik6flsHs=");
 _c = LoginView;
 LoginView.propTypes = {
-    onLoggedIn: (0, _propTypesDefault.default).func.isRequired
+    onLoggedIn: (0, _propTypesDefault.default).func.isRequired,
+    onRegister: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "LoginView");
