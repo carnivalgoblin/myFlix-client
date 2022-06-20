@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './login-view.scss';
+import axios from 'axios';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -12,8 +13,17 @@ export function LoginView(props) {
     e.preventDefault();
     console.log(username, password);
     // Send a request to the server for autghentication
-    // then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
+    axios.post('https://rpflixdb.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+    .then(response => {
+      const data = response.data;
+      props.onLoggedIn(data);
+    })
+    .catch(e => {
+      console.log('No such user') 
+    })
   };
 
   const handleNotRegistered = (e) => {
@@ -28,12 +38,13 @@ export function LoginView(props) {
         <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
       </Form.Group>
 
-      <Form.Group controlID="formPassword">
+      <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" opnChange={e => setPassword(e.target.value)} />
+        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
 
       <Button className="main-button" variant="info" type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button className="main-button" variant="info" type="submit" onClick={handleNotRegistered}>Not registered?</Button>
     </Form>
   );
 };
