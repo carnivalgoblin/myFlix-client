@@ -1,12 +1,34 @@
+#card-image {
+  max-height: 345px;
+  max-width: 250px;
+  align-self: center;
+  padding: 15px;
+}
 
+#movie-card {
+  height: 852px;
+  margin-top: 24px;
+}
 
 .poster {
   width: 250px;
 }
 
+.movie-view {
+  margin-top: 24px;
+}
 
+.movie-poster, .movie-description {
+  margin-bottom: 24px;
+}
 
+.main-button {
+  margin: 10px 10px 10px 0;
+}
 
+.main-button {
+  margin: 10px 10px 10px 0;
+}
 
 
 
