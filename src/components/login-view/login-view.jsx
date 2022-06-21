@@ -34,19 +34,22 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const isReq = validate();
     console.log(username, password);
     // Send a request to the server for autghentication
-    axios.post('https://rpflixdb.herokuapp.com/login', {
-      Username: username,
-      Password: password
-    })
-    .then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
-    })
-    .catch(e => {
-      console.log('No such user') 
-    })
+    if(isReq) {
+     axios.post('https://rpflixdb.herokuapp.com/login', {
+        Username: username,
+        Password: password
+      })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+          console.log('No such user') 
+      });
+    }
   };
 
   const handleNotRegistered = (e) => {
@@ -60,13 +63,13 @@ export function LoginView(props) {
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
-        {usernameErr && <p>{usernameErr}</p>}
+        {usernameErr && <p className="alert-text">{usernameErr}</p>}
       </Form.Group>
 
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-        {passwordErr && <p>{passwordErr}</p>}
+        {passwordErr && <p className="alert-text">{passwordErr}</p>}
       </Form.Group>
 
       <Button className="main-button" variant="info" type="submit" onClick={handleSubmit}>Submit</Button>
