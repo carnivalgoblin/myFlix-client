@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Modal from 'react-bootstrap/Modal';
+
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -38,11 +40,15 @@ export class MovieView extends React.Component {
         </div>
         <div className="movie-genre">
           <span className="label">Genre: <br/></span>
-          <span className="value">{movieData.Genre.Name}</span>
+          <Link to={`/genres/${movieData.Genre.Name}`}>
+            <Button variant="link">{movieData.Genre.Name}</Button>
+          </Link>
         </div>
         <div className="movie-director">
           <span className="label">Director: <br/></span>
-          <span className="value">{movieData.Director.Name}</span>
+          <Link to={`/directors/${movieData.Director.Name}`}>
+            <Button variant="link">{movieData.Director.Name}</Button>
+          </Link>
         </div>
         </Col>
         <Col className="movie-poster" sm={6}>
@@ -51,7 +57,7 @@ export class MovieView extends React.Component {
       </Row>
       <Row>
         <Col>
-          <Button className="back-button" variant="info" onClick={() => { onBackClick(null); }}>Back</Button>
+          <Button className="back-button" variant="info" onClick={() => { onBackClick(); }}>Back</Button>
         </Col>
       </Row>
     </Fragment>

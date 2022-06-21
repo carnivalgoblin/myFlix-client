@@ -1,9 +1,13 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
+
 import './main-view.scss';
 
 import { LoginView } from '../login-view/login-view';
@@ -18,7 +22,6 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
       user: null,
       registered: true
     };
@@ -80,34 +83,40 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user, registered } = this.state;
+    const { movies, user, registered } = this.state;
 
     if (!registered) return <RegistrationView onRegister={registered => this.onRegister(registered)} />;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />;
+    if (!user) return (
+        <Row>
+          <Col>
+            <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
+          </Col>
+        </Row>
+      );
 
-    if (movies.length === 0) return <div className="main-view" />;
+    if (movies.length === 0) return <div className="main-view" />
 
     return (
-      <Fragment>
+      <Router>
         <Navbar fixed="top" onLoggedOut={() => this.onLoggedOut()} />
         <Container>
-        <Row className="main-view justify-content-md-center">
-          {selectedMovie
-            ? (
-              <Col md={8}>
-                <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-              </Col>
-            )
-            : movies.map(movie => (
-                <Col sm={6} md={4} lg={3}>
-                  <MovieCard key={movie._id} movieData={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
+            <Row className="main-view justify-content-md-center">
+              <Route exact path="/" render={() => {
+                return movies.map(m => (
+                  <Col md={3} key={m._id}>
+                    <MovieCard movieData={m} />
+                  </Col>
+                ))
+              }} />
+              <Route path="/movies/:movieId" render={({ match, history }) => {
+                return <Col md={8}>
+                  <MovieView movieData={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
                 </Col>
-              ))
-          }
-        </Row>
+              }} />
+            </Row>
         </Container>
-      </Fragment>
+      </Router>
     );
   }
 }
