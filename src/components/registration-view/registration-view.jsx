@@ -11,12 +11,38 @@ export function RegistrationView(props) {
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ birthday, setBirthday ] = useState('');
+  const [ usernameErr, setUsernameErr] = useState('');
+  const [ passwordErr, setPasswordErr] = useState('');
+
+  // Function to validate input
+  const validate = () => {
+    let isReq = true;
+    if(!username){
+      setUsernameErr('Username required');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be 2 characters long');
+      isReq = false;
+    }
+    if(!password) {
+      setPasswordErr('Password required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be at least 6 characters long');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   // Function to handle registration submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegister(true);
+    const isReq = validate();
+    if(isReq) {
+      console.log(username, password, email, birthday);
+      props.onRegister(true);
+    }
   };
 
   const handleAlreadyRegistered = (e) => {
@@ -30,10 +56,12 @@ export function RegistrationView(props) {
       <Form.Group>
         <Form.Label>Username:</Form.Label>
         <Form.Control type="text" placeholder="Choose Username" value={username} onChange={e => setUsername(e.target.value)} />
+        {usernameErr && <p className="alert-text">{usernameErr}</p>}
       </Form.Group>
        <Form.Group>
         <Form.Label>Password:</Form.Label>
         <Form.Control type="password" placeholder="Choose Password" value={password} onChange={e => setPassword(e.target.value)} />
+        {passwordErr && <p className="alert-text">{passwordErr}</p>}
       </Form.Group>
        <Form.Group>
         <Form.Label>Email:</Form.Label>
