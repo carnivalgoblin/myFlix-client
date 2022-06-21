@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -22,6 +23,7 @@ export function LoginView(props) {
   };
   
   return (
+    <Container>
     <Form>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
@@ -35,6 +37,7 @@ export function LoginView(props) {
 
       <Button className="main-button" variant="info" type="submit" onClick={handleSubmit}>Submit</Button>
     </Form>
+    </Container>
   );
 };
 

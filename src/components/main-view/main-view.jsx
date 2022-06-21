@@ -3,6 +3,7 @@ import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
 import './main-view.scss';
 
 import { LoginView } from '../login-view/login-view';
@@ -64,7 +65,8 @@ export class MainView extends React.Component {
 
     return (
       <Fragment>
-        <Navbar />
+        <Navbar fixed="top" />
+        <Container>
         <Row className="main-view justify-content-md-center">
           {selectedMovie
             ? (
@@ -79,6 +81,7 @@ export class MainView extends React.Component {
               ))
           }
         </Row>
+        </Container>
       </Fragment>
     );
   }

@@ -2,14 +2,40 @@
   width: 250px;
 }
 
+.movie-poster {
+text-align: center;
+}
+
 .movie-view {
   margin-top: 24px;
 }
 
-.movie-poster {
+.movie-description {
   margin-bottom: 24px;
 }
 
-.movie-description {
+.movie-genre {
   margin-bottom: 24px;
+}
+
+.title-row {
+  margin-top: 24px !important; 
+}
+
+.movie-row {
+  margin-top: 24px !important; 
+}
+
+.movie-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.back-button {
+  padding: 0 10px;
 }

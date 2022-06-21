@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -21,20 +24,37 @@ export class MovieView extends React.Component {
     const { movieData, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img className="poster" src={movieData.ImagePath} />
-        </div>
+    <Fragment>
+      <Row className="title-row">
         <div className="movie-title">
-          <span className="label">Title: </span>
           <span className="value">{movieData.Title}</span>
         </div>
+      </Row>
+      <Row className="movie-row">
+        <Col>
         <div className="movie-description">
-          <span className="label">Description: </span>
+          <span className="label">Description: <br/></span>
           <span className="value">{movieData.Description}</span>
         </div>
-        <Button variant="info" onClick={() => { onBackClick(null); }}>Back</Button>
-      </div>
+        <div className="movie-genre">
+          <span className="label">Genre: <br/></span>
+          <span className="value">{movieData.Genre.Name}</span>
+        </div>
+        <div className="movie-director">
+          <span className="label">Director: <br/></span>
+          <span className="value">{movieData.Director.Name}</span>
+        </div>
+        </Col>
+        <Col className="movie-poster">
+          <img className="poster" src={movieData.ImagePath} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button className="back-button" variant="info" onClick={() => { onBackClick(null); }}>Back</Button>
+        </Col>
+      </Row>
+    </Fragment>
     );
   }
 }
