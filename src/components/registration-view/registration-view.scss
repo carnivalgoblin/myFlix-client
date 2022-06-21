@@ -1,7 +1,9 @@
+$alert-color: red;
+
 .main-button {
   margin: 10px 10px 10px 0;
 }
 
 .alert-text {
-  color: red;
+  color: $alert-color;
 }
