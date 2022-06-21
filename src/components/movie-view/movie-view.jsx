@@ -31,7 +31,7 @@ export class MovieView extends React.Component {
         </div>
       </Row>
       <Row className="movie-row">
-        <Col>
+        <Col sm={6}>
         <div className="movie-description">
           <span className="label">Description: <br/></span>
           <span className="value">{movieData.Description}</span>
@@ -45,7 +45,7 @@ export class MovieView extends React.Component {
           <span className="value">{movieData.Director.Name}</span>
         </div>
         </Col>
-        <Col className="movie-poster">
+        <Col className="movie-poster" sm={6}>
           <img className="poster" src={movieData.ImagePath} />
         </Col>
       </Row>

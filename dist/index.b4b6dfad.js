@@ -29624,6 +29624,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                     className: "movie-row",
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                            sm: 6,
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "movie-description",
@@ -29729,6 +29730,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                             className: "movie-poster",
+                            sm: 6,
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                 className: "poster",
                                 src: movieData.ImagePath
