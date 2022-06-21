@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import './registration-view.scss';
+import axios from 'axios';
 
 export function RegistrationView(props) {
   // initiate variables for input
@@ -13,6 +14,7 @@ export function RegistrationView(props) {
   const [ birthday, setBirthday ] = useState('');
   const [ usernameErr, setUsernameErr] = useState('');
   const [ passwordErr, setPasswordErr] = useState('');
+  const [ emailErr, setEmailErr ] = useState('');
 
   // Function to validate input
   const validate = () => {
@@ -31,6 +33,13 @@ export function RegistrationView(props) {
       setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
+    if(!email) {
+      setEmailErr('Email required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setEmailErr('Must be a valid email adress');
+      isReq = false;
+    }
 
     return isReq;
   }
@@ -40,8 +49,23 @@ export function RegistrationView(props) {
     e.preventDefault();
     const isReq = validate();
     if(isReq) {
-      console.log(username, password, email, birthday);
-      props.onRegister(true);
+      axios.post('https://rpflixdb.herokuapp.com/users/register', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        alert('Registration successful. Please login!');
+        window.open('/', '_self');
+        /* props.onRegister(true); */
+      })
+      .catch(response => {
+        console.error(response);
+        alert('Unable to register');
+      });
     }
   };
 
@@ -66,6 +90,7 @@ export function RegistrationView(props) {
        <Form.Group>
         <Form.Label>Email:</Form.Label>
         <Form.Control type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
+        {emailErr && <p className="alert-text">{emailErr}</p>}
       </Form.Group>
        <Form.Group>
         <Form.Label>Birthday:</Form.Label>
