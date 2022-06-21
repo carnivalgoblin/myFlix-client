@@ -1,3 +1,17 @@
+
+
+.main-button {
+  margin: 10px 10px 10px 0;
+}
+
+.main-button {
+  margin: 10px 10px 10px 0;
+}
+
+.alert-text {
+  color: red;
+}
+
 #card-image {
   max-height: 345px;
   max-width: 250px;
@@ -45,22 +59,8 @@
   padding: 0 10px;
 }
 
-.main-button {
-  margin: 10px 10px 10px 0;
-}
-
-.main-button {
-  margin: 10px 10px 10px 0;
-}
-
-.alert-text {
-  color: red;
-}
-
-
-
 .my-flix {
   color: #4682b4;
 }
 
-/*# sourceMappingURL=index.e3f97e84.css.map */
+/*# sourceMappingURL=index.2b25e0b4.css.map */
