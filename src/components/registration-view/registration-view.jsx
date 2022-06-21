@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -24,6 +25,7 @@ export function RegistrationView(props) {
   };
 
   return (
+    <Container>
     <Form>
       <Form.Group>
         <Form.Label>Username:</Form.Label>
@@ -44,6 +46,7 @@ export function RegistrationView(props) {
       <Button variant="info" className="main-button" type="submit" onClick={handleSubmit}>Register</Button>
       <Button variant="info" type="submit" onClick={handleAlreadyRegistered}>Already registered?</Button>
     </Form>
+    </Container>
   );
 }
 
