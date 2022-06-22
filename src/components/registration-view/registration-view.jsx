@@ -74,7 +74,7 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Container>
+    <Container className="registration-view">
     <Form>
       <Form.Group>
         <Form.Label>Username:</Form.Label>
