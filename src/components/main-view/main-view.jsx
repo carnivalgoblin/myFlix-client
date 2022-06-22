@@ -85,15 +85,25 @@ export class MainView extends React.Component {
   render() {
     const { movies, user, registered } = this.state;
 
-    if (!registered) return <RegistrationView onRegister={registered => this.onRegister(registered)} />;
+    if (!registered) return (
+      <Row className="main-view justify-content-md-center">
+        <Col sm={2} md={3} lg={4}> </Col>
+          <Col sm={8} md={6} lg={4}>
+            <RegistrationView onRegister={registered => this.onRegister(registered)} />
+          </Col>
+        <Col sm={2} md={3} lg={4}> </Col>
+      </Row>
+    );
 
     if (!user) return (
-        <Row>
-          <Col>
+      <Row className="main-view justify-content-md-center">
+        <Col sm={2} md={3} lg={4}> </Col>
+          <Col sm={8} md={6} lg={4}>
             <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
           </Col>
-        </Row>
-      );
+        <Col sm={2} md={3} lg={4}> </Col>
+      </Row>
+    );
 
     if (movies.length === 0) return <div className="main-view" />
 
@@ -104,7 +114,7 @@ export class MainView extends React.Component {
             <Row className="main-view justify-content-md-center">
               <Route exact path="/" render={() => {
                 return movies.map(m => (
-                  <Col md={3} key={m._id}>
+                  <Col sm={12} md={6} lg={4} key={m._id}>
                     <MovieCard movieData={m} />
                   </Col>
                 ))
