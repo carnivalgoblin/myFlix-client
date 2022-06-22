@@ -27207,26 +27207,102 @@ class MainView extends (0, _reactDefault.default).Component {
     }
     render() {
         const { movies , selectedMovie , user: user1 , registered: registered1  } = this.state;
-        if (!registered1) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _registrationView.RegistrationView), {
-            onRegister: (registered)=>this.onRegister(registered)
-        }, void 0, false, {
+        if (!registered1) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
+            className: "main-view justify-content-md-center",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    sm: 2,
+                    md: 3,
+                    lg: 4,
+                    children: " "
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 62,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    sm: 8,
+                    md: 6,
+                    lg: 4,
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _registrationView.RegistrationView), {
+                        onRegister: (registered)=>this.onRegister(registered)
+                    }, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 64,
+                        columnNumber: 13
+                    }, this)
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 63,
+                    columnNumber: 11
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    sm: 2,
+                    md: 3,
+                    lg: 4,
+                    children: " "
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 66,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 60,
-            columnNumber: 29
+            lineNumber: 61,
+            columnNumber: 7
         }, this);
-        if (!user1) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-            onLoggedIn: (user)=>this.onLoggedIn(user),
-            onRegister: (registered)=>this.onRegister(registered)
-        }, void 0, false, {
+        if (!user1) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
+            className: "main-view justify-content-md-center",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    sm: 2,
+                    md: 3,
+                    lg: 4,
+                    children: " "
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 72,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    sm: 8,
+                    md: 6,
+                    lg: 4,
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
+                        onLoggedIn: (user)=>this.onLoggedIn(user),
+                        onRegister: (registered)=>this.onRegister(registered)
+                    }, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 74,
+                        columnNumber: 13
+                    }, this)
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 73,
+                    columnNumber: 11
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    sm: 2,
+                    md: 3,
+                    lg: 4,
+                    children: " "
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 76,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 62,
-            columnNumber: 23
+            lineNumber: 71,
+            columnNumber: 7
         }, this);
         if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "main-view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 64,
+            lineNumber: 80,
             columnNumber: 37
         }, this);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react.Fragment), {
@@ -27235,7 +27311,7 @@ class MainView extends (0, _reactDefault.default).Component {
                     fixed: "top"
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 68,
+                    lineNumber: 84,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _containerDefault.default), {
@@ -27250,17 +27326,17 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 74,
+                                lineNumber: 90,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 73,
+                            lineNumber: 89,
                             columnNumber: 15
                         }, this) : movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                                sm: 6,
-                                md: 4,
-                                lg: 3,
+                                sm: 12,
+                                md: 6,
+                                lg: 4,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                                     movieData: movie,
                                     onMovieClick: (newSelectedMovie)=>{
@@ -27268,28 +27344,28 @@ class MainView extends (0, _reactDefault.default).Component {
                                     }
                                 }, movie._id, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 79,
+                                    lineNumber: 95,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 78,
+                                lineNumber: 94,
                                 columnNumber: 17
                             }, this))
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 70,
+                        lineNumber: 86,
                         columnNumber: 9
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 69,
+                    lineNumber: 85,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 67,
+            lineNumber: 83,
             columnNumber: 7
         }, this);
     }
@@ -27324,12 +27400,12 @@ class MovieCard extends (0, _reactDefault.default).Component {
     render() {
         const { movieData , onMovieClick  } = this.props;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
-            id: "movie-card",
+            className: "movie-card",
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Img, {
                     variant: "top",
                     src: movieData.ImagePath,
-                    id: "card-image"
+                    className: "card-image"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
                     lineNumber: 13,
@@ -35229,7 +35305,7 @@ function LoginView(props) {
                     columnNumber: 7
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
-                    controlID: "formPassword",
+                    controlId: "formPassword",
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                             children: "Password:"
@@ -35240,7 +35316,7 @@ function LoginView(props) {
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
                             type: "password",
-                            opnChange: (e)=>setPassword(e.target.value)
+                            onChange: (e)=>setPassword(e.target.value)
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
                             lineNumber: 35,
@@ -36073,7 +36149,7 @@ function Navbar() {
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                 href: "#home",
                                 children: "Home"
-                            }, void 0, false, {
+                            }, "home-link", false, {
                                 fileName: "src/components/navbar/navbar.jsx",
                                 lineNumber: 14,
                                 columnNumber: 17
@@ -36081,7 +36157,7 @@ function Navbar() {
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                 href: "#profile",
                                 children: "Profile"
-                            }, void 0, false, {
+                            }, "profile-link", false, {
                                 fileName: "src/components/navbar/navbar.jsx",
                                 lineNumber: 15,
                                 columnNumber: 17
@@ -36089,7 +36165,7 @@ function Navbar() {
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                 href: "#logout",
                                 children: "Logout"
-                            }, void 0, false, {
+                            }, "logout-link", false, {
                                 fileName: "src/components/navbar/navbar.jsx",
                                 lineNumber: 16,
                                 columnNumber: 17
