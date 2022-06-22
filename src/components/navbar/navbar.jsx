@@ -11,9 +11,9 @@ export function Navbar() {
 		  	  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 		  		  <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#profile">Profile</Nav.Link>
-                <Nav.Link href="#logout">Logout</Nav.Link>
+                <Nav.Link href="#home" key="home-link">Home</Nav.Link>
+                <Nav.Link href="#profile" key="profile-link">Profile</Nav.Link>
+                <Nav.Link href="#logout" key="logout-link">Logout</Nav.Link>
               </Nav>
           </Navbar.Collapse>
 		  </Container>

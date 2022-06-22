@@ -57,9 +57,25 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user, registered } = this.state;
 
-    if (!registered) return <RegistrationView onRegister={registered => this.onRegister(registered)} />;
+    if (!registered) return (
+      <Row className="main-view justify-content-md-center">
+        <Col sm={2} md={3} lg={4}> </Col>
+          <Col sm={8} md={6} lg={4}>
+            <RegistrationView onRegister={registered => this.onRegister(registered)} />
+          </Col>
+        <Col sm={2} md={3} lg={4}> </Col>
+      </Row>
+    );
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />;
+    if (!user) return (
+      <Row className="main-view justify-content-md-center">
+        <Col sm={2} md={3} lg={4}> </Col>
+          <Col sm={8} md={6} lg={4}>
+            <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
+          </Col>
+        <Col sm={2} md={3} lg={4}> </Col>
+      </Row>
+    );
 
     if (movies.length === 0) return <div className="main-view" />;
 
@@ -76,7 +92,7 @@ export class MainView extends React.Component {
             )
             : movies.map(movie => (
                 <Col sm={12} md={6} lg={4}>
-                  <MovieCard key={movie._id} movieData={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
+                  <MovieCard movieData={movie} key={movie._id} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
                 </Col>
               ))
           }
