@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+
 import './login-view.scss';
-import axios from 'axios';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -59,26 +62,28 @@ export function LoginView(props) {
   
   return (
     <Container className="login-view">
-    <Form>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
-        {usernameErr && <p className="alert-text">{usernameErr}</p>}
-      </Form.Group>
+      <h3>Login</h3>
+      <Form>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+          {usernameErr && <p className="alert-text">{usernameErr}</p>}
+        </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-        {passwordErr && <p className="alert-text">{passwordErr}</p>}
-      </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+          {passwordErr && <p className="alert-text">{passwordErr}</p>}
+        </Form.Group>
 
-      <Button className="main-button" variant="info" type="submit" onClick={handleSubmit}>Submit</Button>
-      <Button className="main-button" variant="info" type="submit" onClick={handleNotRegistered}>Not registered?</Button>
-    </Form>
+        <Button className="main-button" variant="info" type="submit" onClick={handleSubmit}>Submit</Button>
+        <Link to={`/register`}>
+          <Button variant="info" className="main-button">Not registered?</Button>
+        </Link> 
+      </Form>
     </Container>
   );
 };
-
 
 LoginView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired,

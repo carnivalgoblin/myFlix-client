@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+
 import './registration-view.scss';
-import axios from 'axios';
 
 export function RegistrationView(props) {
   // initiate variables for input
@@ -75,29 +78,32 @@ export function RegistrationView(props) {
 
   return (
     <Container className="registration-view">
-    <Form>
-      <Form.Group>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" placeholder="Choose Username" value={username} onChange={e => setUsername(e.target.value)} />
-        {usernameErr && <p className="alert-text">{usernameErr}</p>}
-      </Form.Group>
-       <Form.Group>
-        <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" placeholder="Choose Password" value={password} onChange={e => setPassword(e.target.value)} />
-        {passwordErr && <p className="alert-text">{passwordErr}</p>}
-      </Form.Group>
-       <Form.Group>
-        <Form.Label>Email:</Form.Label>
-        <Form.Control type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
-        {emailErr && <p className="alert-text">{emailErr}</p>}
-      </Form.Group>
-       <Form.Group>
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-      </Form.Group>
-      <Button variant="info" className="main-button" type="submit" onClick={handleSubmit}>Register</Button>
-      <Button variant="info" type="submit" onClick={handleAlreadyRegistered}>Already registered?</Button>
-    </Form>
+      <h3>Please register</h3>
+      <Form>
+        <Form.Group>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" placeholder="Choose Username" value={username} onChange={e => setUsername(e.target.value)} required />
+          {usernameErr && <p className="alert-text">{usernameErr}</p>}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="password" placeholder="Choose Password" value={password} onChange={e => setPassword(e.target.value)} required />
+          {passwordErr && <p className="alert-text">{passwordErr}</p>}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Email:</Form.Label>
+          <Form.Control type="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} required />
+          {emailErr && <p className="alert-text">{emailErr}</p>}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+        </Form.Group>
+        <Button variant="info" className="main-button" type="submit" onClick={handleSubmit}>Register</Button>
+        <Link to={`/login`}>
+          <Button variant="info" className="main-button">Already registered?</Button>
+        </Link>      
+      </Form>
     </Container>
   );
 }
