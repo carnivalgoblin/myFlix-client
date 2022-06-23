@@ -1,0 +1,9 @@
+$standard-margin: 24px;
+
+.director-name {
+  margin-top: $standard-margin !important;
+}
+
+.director-bio, .director-name, .director-birth {
+  margin-bottom: $standard-margin;
+}

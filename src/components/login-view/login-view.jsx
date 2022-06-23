@@ -54,11 +54,6 @@ export function LoginView(props) {
       });
     }
   };
-
-  const handleNotRegistered = (e) => {
-    e.preventDefault();
-    props.onRegister(false);
-  };
   
   return (
     <Container className="login-view">
@@ -86,6 +81,5 @@ export function LoginView(props) {
 };
 
 LoginView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired,
-    onRegister: PropTypes.func.isRequired
+    onLoggedIn: PropTypes.func.isRequired
   };
