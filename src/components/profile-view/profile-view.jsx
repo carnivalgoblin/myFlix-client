@@ -80,8 +80,10 @@ export function ProfileView({movies}) {
   // Update user info
   const updateUser = (e) => {
     e.preventDefault();
+    const isReq = validate();
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
+    if (isReq) {
     axios.put(`https://rpflixdb.herokuapp.com/users/${user}`, 
     {
         Username: username,
@@ -102,7 +104,7 @@ export function ProfileView({movies}) {
         console.error(response);
         alert('Unable to update ');
       });
-    }
+    }}
 
   // Deregister user
   const deregisterUser = () => {
