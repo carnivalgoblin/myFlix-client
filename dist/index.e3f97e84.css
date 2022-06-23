@@ -46,6 +46,7 @@
 }
 
 .label {
+  margin-bottom: 5px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -54,16 +55,15 @@
   padding: 0 10px;
 }
 
-.main-button {
-  margin: 10px 10px 10px 0;
-}
-
 .login-view {
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
   margin-top: 24px;
+  padding: 24px;
 }
 
 .main-button {
-  margin: 10px 10px 10px 0;
+  margin: 24px 10px 0 0;
 }
 
 .alert-text {
@@ -71,10 +71,36 @@
 }
 
 .registration-view {
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
   margin-top: 24px;
+  padding: 24px;
 }
 
 
+
+.director-name {
+  margin-top: 24px !important;
+}
+
+.director-bio, .director-name, .director-birth {
+  margin-bottom: 24px;
+}
+
+.profile-view, .favorites-view {
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  margin-top: 24px;
+  padding: 24px;
+}
+
+.genre-title {
+  margin-top: 24px !important;
+}
+
+.genre-description, .genre-title {
+  margin-bottom: 24px;
+}
 
 .my-flix {
   color: #4682b4;
