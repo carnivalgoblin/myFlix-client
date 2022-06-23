@@ -132,16 +132,16 @@ export class MainView extends React.Component {
               
                 return (
                   <>
-                    <Col sm={2} md={3} lg={4}> </Col>
-                    <Col sm={8} md={6} lg={4}>
+                    <Col sm={2} md={3} lg={3}> </Col>
+                    <Col sm={8} md={6} lg={6}>
                       <RegistrationView onRegister={registered => this.onRegister(registered)} />
                     </Col>
-                    <Col sm={2} md={3} lg={4}> </Col>
+                    <Col sm={2} md={3} lg={3}> </Col>
                   </>
                 )}} />
 
               <Route path="/login" render={({ match, history }) => {
-              if (user) return <Redirect to="/" />
+              if (!user) return <Redirect to="/" />
               if (movies.length === 0) return <div className="main-view" />;
               
               return (

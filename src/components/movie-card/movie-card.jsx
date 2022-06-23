@@ -9,7 +9,7 @@ import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movieData, onMovieClick } = this.props;
+    const { movieData } = this.props;
 
     return (
       <Card className="movie-card">
@@ -43,6 +43,5 @@ MovieCard.propTypes = {
     Actors: PropTypes.array,
     Featured: PropTypes.bool,
     _id: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieClick:PropTypes.func.isRequired
+  }).isRequired
 };
