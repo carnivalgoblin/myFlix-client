@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 
 import './registration-view.scss';
 
-export function RegistrationView(props) {
+export function RegistrationView() {
   // initiate variables for input
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -71,11 +71,6 @@ export function RegistrationView(props) {
     }
   };
 
-  const handleAlreadyRegistered = (e) => {
-    e.preventDefault();
-    props.onRegister(true);
-  };
-
   return (
     <Container className="registration-view">
       <h3>Please register</h3>
@@ -107,7 +102,3 @@ export function RegistrationView(props) {
     </Container>
   );
 }
-
-RegistrationView.propTypes = {
-  onRegister: PropTypes.func.isRequired
-};
