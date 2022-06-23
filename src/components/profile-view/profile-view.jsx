@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect, Fragment }  from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -9,9 +9,11 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
-/* import './profile-view.scss'; */
+import './profile-view.scss';
 
-export function ProfileView({user}) {
+import { MovieCard } from '../movie-card/movie-card';
+
+export function ProfileView({movies}) {
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -20,6 +22,7 @@ export function ProfileView({user}) {
   const [ usernameErr, setUsernameErr] = useState('');
   const [ passwordErr, setPasswordErr] = useState('');
   const [ emailErr, setEmailErr] = useState('');
+  const [ favoriteMovies, setFavoriteMovie ] = useState('');
 
   // Function to validate input
   const validate = () => {
@@ -67,6 +70,7 @@ export function ProfileView({user}) {
       setUsername(data.Username)
       setEmail(data.Email)
       setBirthday(data.Birthday)
+      setFavoriteMovie(data.Favorites)
     })
     .catch(e => {
       console.log("Error!")
@@ -121,34 +125,56 @@ export function ProfileView({user}) {
       });
   }
 
+  // Call favorite movies
+  const favoriteMoviesRender = () => {
+    console.log(movies)
+    if (movies.length !== 0) {
+      return (
+        <Row className="justify-content-md-center">
+          <Col>
+            {favoriteMovies.length === 0 ? (<p>You have no favorite movies. Add some.</p>) : (favoriteMovies.map(movieId => (<MovieCard key={movies._id} movieData={movies.find(m => m._id == movieId)} />)))}
+          </Col>
+        </Row>
+      )
+    }
+  }
+
     return (
-      <Form>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control type="text" placeholder={username} onChange={e => setUsername(e.target.value)} />
-          {usernameErr && <p className="alert-text">{usernameErr}</p>}
-        </Form.Group>
+      <Fragment>
+        <Container className="profile-view">
+          <h3>Your profile</h3>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control type="text" placeholder={username} onChange={e => setUsername(e.target.value)} />
+              {usernameErr && <p className="alert-text">{usernameErr}</p>}
+            </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control type="password" placeholder="****" onChange={e => setPassword(e.target.value)} />
-          {passwordErr && <p className="alert-text">{passwordErr}</p>}
-        </Form.Group>
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" placeholder="****" onChange={e => setPassword(e.target.value)} />
+              {passwordErr && <p className="alert-text">{passwordErr}</p>}
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Email:</Form.Label>
-          <Form.Control type="email" placeholder={email} value={email} onChange={e => setEmail(e.target.value)} />
-          {emailErr && <p className="alert-text">{emailErr}</p>}
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="email" placeholder={email} value={email} onChange={e => setEmail(e.target.value)} />
+              {emailErr && <p className="alert-text">{emailErr}</p>}
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Birthday:</Form.Label>
-          <Form.Control type="date" placeholder={birthday} value={birthday} onChange={e => setBirthday(e.target.value)} />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Birthday:</Form.Label>
+              <Form.Control type="date" placeholder={birthday} value={birthday} onChange={e => setBirthday(e.target.value)} />
+            </Form.Group>
 
-        <Button className="main-button" variant="info" type="submit" onClick={updateUser}>Update</Button>
-        <Button className="main-button" variant="danger" type="submit" onClick={deregisterUser}>Deregister</Button>
-
-      </Form>
+            <Button className="main-button" variant="info" type="submit" onClick={updateUser}>Update</Button>
+            <Button className="main-button" variant="danger" type="submit" onClick={deregisterUser}>Deregister</Button>
+          </Form>
+        </Container>
+        <Container className="favorites-view">
+          <h3>Your favorite movies</h3>
+          {favoriteMoviesRender()}
+        </Container>
+      </Fragment>
     )
   };
