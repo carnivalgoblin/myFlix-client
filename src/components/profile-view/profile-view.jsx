@@ -99,11 +99,11 @@ export function ProfileView({movies}) {
         console.log(data);
         alert('Profile has been updated');
         localStorage.setItem('user', data.Username);
-        open.window("/", "_self");
+        window.open("/", "_self");
       })
       .catch(response => {
         console.error(response);
-        alert('Unable to update ');
+        alert('Unable to update');
       });
     }}
 
@@ -117,10 +117,13 @@ export function ProfileView({movies}) {
       .then((response) => {
         const data = response.data;
         console.log(data);
-        alert("Your profile has been deleted!");
-        window.open("/", "_self");
         localStorage.removeItem('user');
-        localStorage.removeItem('token');        
+        localStorage.removeItem('token');
+        this.setState({
+          user: null
+        });
+        alert("Your profile has been deleted!");        
+        window.open("/", "_self");
       })
       .catch(response => {
         console.error(response);
@@ -130,7 +133,6 @@ export function ProfileView({movies}) {
 
   // Call favorite movies
   const favoriteMoviesRender = () => {
-    console.log(movies)
     if (movies.length !== 0) {
       return (
         <Row className="justify-content-md-center">

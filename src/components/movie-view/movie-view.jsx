@@ -67,7 +67,6 @@ export class MovieView extends React.Component {
     .then(response => {
       const data = response.data;
       console.log(data);
-      console.log(userFavorites.includes(this.props.movieData._id));
       this.setState({
         Favorites: data.Favorites
       })
