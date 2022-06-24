@@ -87,19 +87,19 @@
   margin-bottom: 24px;
 }
 
-.profile-view, .favorites-view {
-  border: 1px solid #d3d3d3;
-  border-radius: 10px;
-  margin-top: 24px;
-  padding: 24px;
-}
-
 .genre-title {
   margin-top: 24px !important;
 }
 
 .genre-description, .genre-title {
   margin-bottom: 24px;
+}
+
+.profile-view, .favorites-view {
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  margin-top: 24px;
+  padding: 24px;
 }
 
 .my-flix {
