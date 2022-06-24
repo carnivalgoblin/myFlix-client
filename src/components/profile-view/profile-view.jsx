@@ -138,7 +138,7 @@ export function ProfileView({movies}) {
       return (
         <Row className="justify-content-md-center">
           <Col>
-            {favoriteMovies.length === 0 ? (<p>You have no favorite movies. Add some.</p>) : (favoriteMovies.map(movieId => (<MovieCard key={movies._id} movieData={movies.find(m => m._id == movieId)} />)))}
+            {favoriteMovies.length === 0 ? (<p>You have no favorite movies. Add some.</p>) : (favoriteMovies.map(movieId => (<MovieCard movieData={movies.find(m => m._id == movieId)} />)))}
           </Col>
         </Row>
       )
@@ -179,7 +179,9 @@ export function ProfileView({movies}) {
         </Container>
         <Container className="favorites-view">
           <h3>Your favorite movies</h3>
+          <Col key={movies._id}>
           {favoriteMoviesRender()}
+          </Col>
         </Container>
       </Fragment>
     )
