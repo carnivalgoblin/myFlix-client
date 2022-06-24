@@ -25,25 +25,29 @@ export class MovieView extends React.Component {
  
   componentDidMount() {
     document.addEventListener('keypress', this.keypressCallback);
+    const token = localStorage.getItem('token');
+    this.getUser(token);
   }
   
   componentWillUnmount() {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
+ 
   // Get user favorites
-  getUser = () => {
-    let token = localStorage.getItem('token');
+  getUser (token) {
+    /* let token = localStorage.getItem('token'); */
     let user = localStorage.getItem('user');
     axios.get(`https://rpflixdb.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
       const data = response.data;
+      console.log("User data has been loaded.");
       this.setState({
         username: data.Username,
         Favorites: data.Favorites
-      })
+      });      
     })
     .catch(e => {
       console.log("Error! Unable to fetch user info.")
@@ -63,6 +67,10 @@ export class MovieView extends React.Component {
     .then(response => {
       const data = response.data;
       console.log(data);
+      console.log(userFavorites.includes(this.props.movieData._id));
+      this.setState({
+        Favorites: data.Favorites
+      })
       alert(`${this.props.movieData.Title} has been added to your list of favorite movies.`)
     })
     .catch(e => {
@@ -83,6 +91,9 @@ export class MovieView extends React.Component {
       const data = response.data;
       console.log(data);
       alert(`${this.props.movieData.Title} has been removed from your list of favorites.`);
+      this.setState({
+        Favorites: data.Favorites
+      })
     })
     .catch(e => {
       console.log(e)
@@ -91,6 +102,9 @@ export class MovieView extends React.Component {
 
   render() {
     const { movieData, onBackClick } = this.props;
+    const { Favorites, username } = this.state;
+    let userFavorites =  this.state.Favorites;
+    let isFavorite = userFavorites.includes(this.props.movieData._id);
 
     return (
     <Fragment>
@@ -123,14 +137,16 @@ export class MovieView extends React.Component {
         </Col>
       </Row>
       <Row>
+        {!isFavorite && (
         <Col>
           <Button className="main-button add-favorite-button" variant="warning" onClick={this.addFavorite}>Add to favorites</Button>
         </Col>
-      <Row>
+        )}
+        {isFavorite && (
         <Col>
           <Button className="main-button remove-favorite-button" variant="warning" onClick={this.removeFavorite}>Remove from favorites</Button>
         </Col>
-      </Row>
+        )}
       </Row>
       <Row>
         <Col>
