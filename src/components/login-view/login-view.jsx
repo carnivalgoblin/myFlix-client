@@ -50,7 +50,8 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch(e => {
-          console.log('No such user') 
+          console.log('No such user');
+          alert('Unable to login. Please check your password and username.'); 
       });
     }
   };
