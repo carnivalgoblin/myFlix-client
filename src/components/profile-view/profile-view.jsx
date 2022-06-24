@@ -98,7 +98,8 @@ export function ProfileView({movies}) {
         const data = response.data;
         console.log(data);
         alert('Profile has been updated');
-        localStorage.setItem('user', data.Username)
+        localStorage.setItem('user', data.Username);
+        open.window("/", "_self");
       })
       .catch(response => {
         console.error(response);
@@ -117,9 +118,9 @@ export function ProfileView({movies}) {
         const data = response.data;
         console.log(data);
         alert("Your profile has been deleted!");
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
         window.open("/", "_self");
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');        
       })
       .catch(response => {
         console.error(response);
