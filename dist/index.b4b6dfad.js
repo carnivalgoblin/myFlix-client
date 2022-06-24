@@ -41610,7 +41610,7 @@ function ProfileView({ movies  }) {
                     columnNumber: 45
                 }, this) : favoriteMovies.map((movieId)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                         movieData: movies.find((m)=>m._id == movieId)
-                    }, movies._id, false, {
+                    }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
                         lineNumber: 141,
                         columnNumber: 126
@@ -41808,7 +41808,13 @@ function ProfileView({ movies  }) {
                         lineNumber: 181,
                         columnNumber: 11
                     }, this),
-                    favoriteMoviesRender()
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                        children: favoriteMoviesRender()
+                    }, movies._id, false, {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 182,
+                        columnNumber: 11
+                    }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
