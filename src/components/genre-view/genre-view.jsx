@@ -15,7 +15,8 @@ export class GenreView extends React.Component {
     const { genre, onBackClick } = this.props;
 
     return (
-      <Fragment className="genre-view">
+      <Fragment>
+        <Container className="genre-view">
         <Row>
           <Col sm={3} />
             <Col sm={6} className="genre-title">
@@ -39,6 +40,7 @@ export class GenreView extends React.Component {
             </Col>
           <Col sm={3} />
         </Row>
+        </Container>
       </Fragment>
     )
   }
@@ -46,7 +48,7 @@ export class GenreView extends React.Component {
 
 GenreView.propTypes ={
   genre: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Descriptionn: PropTypes.string.isRequired
+    Name: PropTypes.string,
+    Descriptionn: PropTypes.string
   }).isRequired
 }

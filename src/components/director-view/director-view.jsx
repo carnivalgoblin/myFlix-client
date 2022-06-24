@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './director-view.scss';
+import { Container } from 'react-bootstrap';
 
 export class DirectorView extends React.Component {
 
@@ -14,7 +15,8 @@ export class DirectorView extends React.Component {
     const { director, onBackClick } = this.props;
 
     return (
-      <Fragment className="director-view">
+      <Fragment>
+        <Container className="director-view">
         <Row>
           <Col sm={3} />
             <Col sm={6} className="director-name">
@@ -45,8 +47,8 @@ export class DirectorView extends React.Component {
               <Button className="back-button" variant="info" onClick={() => { onBackClick(); }}>Back</Button>
             </Col>
           <Col sm={3} />
-          
-        </Row>
+          </Row>
+        </Container>
       </Fragment>
     )
   }
@@ -54,8 +56,8 @@ export class DirectorView extends React.Component {
 
 DirectorView.propTypes ={
   director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string.isRequired,
-    Birth: PropTypes.string.isRequired
+    Name: PropTypes.string,
+    Bio: PropTypes.string,
+    Birth: PropTypes.string
   }).isRequired
 }
