@@ -66,10 +66,11 @@ export function ProfileView({movies}) {
     })
     .then(response => {
       const data = response.data;
+      const shortBirthday = data.Birthday.replace("T00:00:00.000Z", "")
       console.log(data);
       setUsername(data.Username)
       setEmail(data.Email)
-      setBirthday(data.Birthday)
+      setBirthday(shortBirthday)
       setFavoriteMovie(data.Favorites)
     })
     .catch(e => {
