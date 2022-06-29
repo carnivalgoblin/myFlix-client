@@ -139,6 +139,29 @@ export class MainView extends React.Component {
     });
   }
 
+  deregisterUser = (props) => {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.delete(`https://rpflixdb.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}`}
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        this.setState({
+          user: null
+        });
+        alert("Your profile has been deleted!");        
+        window.open("/", "_self");
+      })
+      .catch(response => {
+        console.error(response);
+        alert('Unable to unregister');
+      });
+  }
+
   render() {
     const { movies, user, favorites } = this.state;
 
@@ -225,7 +248,7 @@ export class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
               
               return <Col md={8}>
-                  <ProfileView movies={movies} user={user} favorites={favorites} onBackClick={() => history.goBack()} />
+                  <ProfileView movies={movies} user={user} favorites={favorites} deregisterUser={this.deregisterUser} onBackClick={() => history.goBack()} />
                 </Col>}} 
               />
 

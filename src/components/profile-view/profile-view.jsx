@@ -12,8 +12,9 @@ import Form from 'react-bootstrap/Form';
 import './profile-view.scss';
 
 import { MovieCard } from '../movie-card/movie-card';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-export function ProfileView({movies, favorites}) {
+export function ProfileView({movies, favorites, deregisterUser}) {
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -22,7 +23,6 @@ export function ProfileView({movies, favorites}) {
   const [ usernameErr, setUsernameErr] = useState('');
   const [ passwordErr, setPasswordErr] = useState('');
   const [ emailErr, setEmailErr] = useState('');
-  const [ favoriteMovies, setFavoriteMovie ] = useState('');
 
   // Function to validate input
   const validate = () => {
@@ -82,37 +82,14 @@ export function ProfileView({movies, favorites}) {
       });
     }}
 
-  // Deregister user
-  const deregisterUser = () => {
-    let token = localStorage.getItem('token');
-    let user = localStorage.getItem('user');
-    axios.delete(`https://rpflixdb.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}`}
-      })
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        this.setState({
-          user: null
-        });
-        alert("Your profile has been deleted!");        
-        window.open("/", "_self");
-      })
-      .catch(response => {
-        console.error(response);
-        alert('Unable to unregister');
-      });
-  }
 
   // Call favorite movies
-  const favoriteMoviesRender = () => {
+  const favoriteMoviesRender = (props) => {
     if (movies.length !== 0) {
       return (
         <Row className="justify-content-md-center">
           <Col>
-            {favoriteMovies.length === 0 ? (<p>You have no favorite movies. Add some.</p>) : (favoriteMovies.map(movieId => (<MovieCard movieData={movies.find(m => m._id == movieId)} />)))}
+            {favorites.length === 0 ? (<p>You have no favorite movies. Add some.</p>) : (favorites.map(movieId => (<Col key={movieId}><MovieCard movieData={movies.find(m => m._id == movieId)} /></Col>)))}
           </Col>
         </Row>
       )
@@ -148,12 +125,12 @@ export function ProfileView({movies, favorites}) {
             </Form.Group>
 
             <Button className="main-button" variant="info" type="submit" onClick={updateUser}>Update</Button>
-            <Button className="main-button" variant="danger" type="submit" onClick={deregisterUser}>Deregister</Button>
+            <Button className="main-button" variant="danger" type="button" onClick={deregisterUser}>Deregister</Button>
           </Form>
         </Container>
         <Container className="favorites-view">
           <h3>Your favorite movies</h3>
-          <Col key={movies._id}>
+          <Col>
           {favoriteMoviesRender()}
           </Col>
         </Container>
