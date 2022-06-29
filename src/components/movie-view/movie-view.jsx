@@ -7,7 +7,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './movie-view.scss';
-import axios from 'axios';
 
 export class MovieView extends React.Component {
 

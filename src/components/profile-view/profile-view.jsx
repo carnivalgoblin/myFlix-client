@@ -1,6 +1,4 @@
 import React, { useState, useEffect, Fragment }  from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Button from 'react-bootstrap/Button';
@@ -12,7 +10,6 @@ import Form from 'react-bootstrap/Form';
 import './profile-view.scss';
 
 import { MovieCard } from '../movie-card/movie-card';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 export function ProfileView({movies, favorites, deregisterUser}) {
 
