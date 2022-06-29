@@ -31,7 +31,7 @@ export function Navbar({user}) {
                 {!isAuth() && (<Nav.Link href='/register'>Sign-up</Nav.Link>)}
                 {isAuth() && (<Nav.Link onClick={onLogout}>Logout</Nav.Link>)}
               </Nav>
-          </Navbar.Collapse>
+            </Navbar.Collapse>
 		  </Container>
 	  </Navbar>
   );
