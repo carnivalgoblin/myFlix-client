@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import axios from 'axios';
 
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
@@ -26,6 +26,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
+      favorites: [],
       registered: true
     };
   }
@@ -37,6 +38,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getFavorites();
     }
   }
 
@@ -52,6 +54,58 @@ export class MainView extends React.Component {
     })
     .catch(function (error) {
       console.log(error);
+    });
+  }
+
+  getFavorites () {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.get(`https://rpflixdb.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      this.setState({
+        favorites: response.data.Favorites
+      });
+    })
+    .catch(e => {
+      console.log("Error!")
+    });
+  }
+
+  addFavorite = (movie) => {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');    
+    axios.patch(`https://rpflixdb.herokuapp.com/users/${user}/favorites/${movie._id}`, {},{
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      alert(`${movie.Title} has been added to your list of favorite movies.`);
+      this.getFavorites();
+    })
+    .catch(e => {
+      console.log(e);
+      console.log(`Could not add ${movie.Title} to favorites.`)
+    });
+  }
+
+  removeFavorite = (movie) => {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.delete(`https://rpflixdb.herokuapp.com/users/${user}/favorites/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      alert(`${movie.Title} has been removed from your list of favorites.`);
+      this.getFavorites();
+    })
+    .catch(e => {
+      console.log(e);
+      console.log(`Could not remove ${movie.Title} from favorites.`)
     });
   }
 
@@ -86,7 +140,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, registered } = this.state;
+    const { movies, user, favorites } = this.state;
 
     return (
       <Router>
@@ -117,7 +171,7 @@ export class MainView extends React.Component {
                 if (movies.length === 0) return <div className="main-view" />;
                 
                 return <Col md={8}>
-                  <MovieView movieData={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
+                  <MovieView favorites={favorites} removeFavorite={this.removeFavorite} addFavorite={this.addFavorite} movieData={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
                 </Col>
               }} />
 
@@ -171,7 +225,7 @@ export class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
               
               return <Col md={8}>
-                  <ProfileView movies={movies} user={user} onBackClick={() => history.goBack()} />
+                  <ProfileView movies={movies} user={user} favorites={favorites} onBackClick={() => history.goBack()} />
                 </Col>}} 
               />
 

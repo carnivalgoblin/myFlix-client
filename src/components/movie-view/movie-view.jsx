@@ -13,10 +13,6 @@ export class MovieView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      username: null,
-      Favorites: []
-    };
   }
 
   keypressCallback(event) {
@@ -26,84 +22,15 @@ export class MovieView extends React.Component {
   componentDidMount() {
     document.addEventListener('keypress', this.keypressCallback);
     const token = localStorage.getItem('token');
-    this.getUser(token);
   }
   
   componentWillUnmount() {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
- 
-  // Get user favorites
-  getUser (token) {
-    /* let token = localStorage.getItem('token'); */
-    let user = localStorage.getItem('user');
-    axios.get(`https://rpflixdb.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      const data = response.data;
-      console.log("User data has been loaded.");
-      this.setState({
-        username: data.Username,
-        Favorites: data.Favorites
-      });      
-    })
-    .catch(e => {
-      console.log("Error! Unable to fetch user info.")
-    });
-  }
-
-  // Add function to add favorite movie
-  addFavorite = () => {
-    let token = localStorage.getItem('token');
-    let user = localStorage.getItem('user');
-    let userFavorites =  this.state.Favorites;
-    let isFavorite = userFavorites.includes(this.props.movieData._id);
-    if (!isFavorite) {
-      axios.patch(`https://rpflixdb.herokuapp.com/users/${user}/favorites/${this.props.movieData._id}`, {},{
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      const data = response.data;
-      console.log(data);
-      this.setState({
-        Favorites: data.Favorites
-      })
-      alert(`${this.props.movieData.Title} has been added to your list of favorite movies.`)
-    })
-    .catch(e => {
-      console.log(e);
-    });
-    } else if (isFavorite) {
-      alert(`${this.props.movieData.Title} is already present in your list of favorite movies.`);
-    }
-  }
-
-  removeFavorite = () => {
-    let token = localStorage.getItem('token');
-    let user = localStorage.getItem('user');
-    axios.delete(`https://rpflixdb.herokuapp.com/users/${user}/favorites/${this.props.movieData._id}`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      const data = response.data;
-      console.log(data);
-      alert(`${this.props.movieData.Title} has been removed from your list of favorites.`);
-      this.setState({
-        Favorites: data.Favorites
-      })
-    })
-    .catch(e => {
-      console.log(e)
-    });
-  }
-
   render() {
-    const { movieData, onBackClick } = this.props;
-    const { Favorites, username } = this.state;
-    let userFavorites =  this.state.Favorites;
-    let isFavorite = userFavorites.includes(this.props.movieData._id);
+    const { movieData, onBackClick, favorites, removeFavorite, addFavorite } = this.props;
+    let isFavorite = favorites.includes(this.props.movieData._id);
 
     return (
     <Fragment>
@@ -138,12 +65,12 @@ export class MovieView extends React.Component {
       <Row>
         {!isFavorite && (
         <Col>
-          <Button className="main-button add-favorite-button" variant="warning" onClick={this.addFavorite}>Add to favorites</Button>
+          <Button className="main-button add-favorite-button" variant="warning" onClick={() => (addFavorite(this.props.movieData))}>Add to favorites</Button>
         </Col>
         )}
         {isFavorite && (
         <Col>
-          <Button className="main-button remove-favorite-button" variant="warning" onClick={this.removeFavorite}>Remove from favorites</Button>
+          <Button className="main-button remove-favorite-button" variant="warning" onClick={() => (removeFavorite(this.props.movieData))}>Remove from favorites</Button>
         </Col>
         )}
       </Row>

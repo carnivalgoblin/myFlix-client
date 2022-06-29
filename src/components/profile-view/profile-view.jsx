@@ -13,7 +13,7 @@ import './profile-view.scss';
 
 import { MovieCard } from '../movie-card/movie-card';
 
-export function ProfileView({movies}) {
+export function ProfileView({movies, favorites}) {
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -50,32 +50,6 @@ export function ProfileView({movies}) {
     }
 
     return isReq;
-  }
-
-  // Get user info
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
-  const getUser = () => {
-    let token = localStorage.getItem('token');
-    let user = localStorage.getItem('user');
-    axios.get(`https://rpflixdb.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      const data = response.data;
-      const shortBirthday = data.Birthday.replace("T00:00:00.000Z", "")
-      console.log(data);
-      setUsername(data.Username)
-      setEmail(data.Email)
-      setBirthday(shortBirthday)
-      setFavoriteMovie(data.Favorites)
-    })
-    .catch(e => {
-      console.log("Error!")
-    });
   }
 
   // Update user info
