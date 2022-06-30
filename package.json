@@ -33,7 +33,7 @@
     "process": false
   },
   "devDependencies": {
-    /* "@parcel/transformer-sass": "^2.6.0", */
+    "@parcel/transformer-sass": "^2.6.0",
     "buffer": "^6.0.3",
     "parcel": "^2.6.2",
     "sass": "^1.52.1"
