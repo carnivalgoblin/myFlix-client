@@ -1,0 +1,111 @@
+
+.login-view {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+.main-button {
+  margin: 24px 10px 0 0;
+}
+
+.alert-text {
+  color: red;
+}
+
+.registration-view {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+.poster {
+  width: 250px;
+  margin: 24px 0;
+}
+
+.movie-poster {
+  text-align: center;
+}
+
+.movie-view {
+  margin-top: 24px;
+}
+
+.movie-description {
+  margin-bottom: 24px;
+}
+
+.movie-genre {
+  margin-bottom: 24px;
+}
+
+.title-row {
+  margin-top: 24px !important;
+}
+
+.movie-row {
+  margin-top: 24px !important;
+}
+
+.movie-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.back-button {
+  padding: 0 10px;
+}
+.director-name {
+  margin-top: 24px !important;
+}
+
+.director-bio, .director-name, .director-birth {
+  margin-bottom: 24px;
+}
+.genre-title {
+  margin-top: 24px !important;
+}
+
+.genre-description, .genre-title {
+  margin-bottom: 24px;
+}
+.profile-view, .favorites-view {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+.card-image {
+  height: 270px;
+  width: 210px !important;
+  padding: 15px;
+  align-self: center;
+}
+
+.movie-card {
+  height: 500px;
+  /*   width: 480px; */
+  margin-top: 24px;
+}
+
+.card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.my-flix {
+  color: steelblue;
+}
+/*# sourceMappingURL=index.17d663fa.css.map */
