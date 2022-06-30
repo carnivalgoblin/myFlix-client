@@ -28050,6 +28050,7 @@ var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
 var _navbar1 = require("../navbar/navbar");
+var _navbarDefault1 = parcelHelpers.interopDefault(_navbar1);
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -28183,7 +28184,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this,
             children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_navbar1.Navbar, {
+                /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault1.default, {
                     user: user,
                     fixed: "top",
                     __source: {
@@ -48401,13 +48402,11 @@ $parcel$ReactRefreshHelpers$1bb2.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Navbar", ()=>Navbar
-);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
-function Navbar({ user  }) {
+function Navigationbar({ user  }) {
     const onLogout = ()=>{
         localStorage.clear();
         window.open("/", "_self");
@@ -48511,9 +48510,10 @@ function Navbar({ user  }) {
         })
     }));
 }
-_c = _reactBootstrap.Navbar;
+_c = Navigationbar;
+exports.default = Navigationbar;
 var _c;
-$RefreshReg$(_c, "Navbar");
+$RefreshReg$(_c, "Navigationbar");
 
   $parcel$ReactRefreshHelpers$1bb2.postlude(module);
 } finally {
