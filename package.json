@@ -20,7 +20,6 @@
   "homepage": "https://github.com/carnivalgoblin/myFlix-client#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "parcel": "^2.0.0-rc.0",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
@@ -36,6 +35,7 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "buffer": "^6.0.3",
+    "parcel": "^2.6.2",
     "sass": "^1.52.1"
   }
 }
