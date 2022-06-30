@@ -1,0 +1,66 @@
+
+
+.main-button {
+  margin: 10px 10px 10px 0;
+}
+
+.main-button {
+  margin: 10px 10px 10px 0;
+}
+
+.alert-text {
+  color: red;
+}
+
+#card-image {
+  max-height: 345px;
+  max-width: 250px;
+  align-self: center;
+  padding: 15px;
+}
+
+#movie-card {
+  height: 852px;
+  margin-top: 24px;
+}
+
+.poster {
+  width: 250px;
+  margin: 24px 0;
+}
+
+.movie-poster {
+  text-align: center;
+}
+
+.movie-view {
+  margin-top: 24px;
+}
+
+.movie-description, .movie-genre {
+  margin-bottom: 24px;
+}
+
+.title-row, .movie-row {
+  margin-top: 24px !important;
+}
+
+.movie-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.back-button {
+  padding: 0 10px;
+}
+
+.my-flix {
+  color: #4682b4;
+}
+
+/*# sourceMappingURL=index.2b25e0b4.css.map */

@@ -1,6 +1,8 @@
+$standard-margin: 24px;
+
 .poster {
   width: 250px;
-  margin: 24px 0;
+  margin: $standard-margin 0;
 }
 
 .movie-poster {
@@ -9,23 +11,23 @@ text-align: center;
 }
 
 .movie-view {
-  margin-top: 24px;
+  margin-top: $standard-margin;
 }
 
 .movie-description {
-  margin-bottom: 24px;
+  margin-bottom: $standard-margin;
 }
 
 .movie-genre {
-  margin-bottom: 24px;
+  margin-bottom: $standard-margin;
 }
 
 .title-row {
-  margin-top: 24px !important; 
+  margin-top: $standard-margin !important; 
 }
 
 .movie-row {
-  margin-top: 24px !important; 
+  margin-top: $standard-margin !important; 
 }
 
 .movie-title {
@@ -36,6 +38,7 @@ text-align: center;
 .label {
   font-size: 14px;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .back-button {

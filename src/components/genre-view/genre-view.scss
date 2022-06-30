@@ -1,0 +1,9 @@
+$standard-margin: 24px;
+
+.genre-title {
+  margin-top: $standard-margin !important;
+}
+
+.genre-description, .genre-title {
+  margin-bottom: $standard-margin;
+}
