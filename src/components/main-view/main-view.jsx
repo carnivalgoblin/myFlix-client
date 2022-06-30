@@ -81,8 +81,6 @@ export class MainView extends React.Component {
     })
     .then(response => {
       const data = response.data;
-      console.log(data);
-      alert(`${movie.Title} has been added to your list of favorite movies.`);
       this.getFavorites();
     })
     .catch(e => {
@@ -99,8 +97,6 @@ export class MainView extends React.Component {
     })
     .then(response => {
       const data = response.data;
-      console.log(data);
-      alert(`${movie.Title} has been removed from your list of favorites.`);
       this.getFavorites();
     })
     .catch(e => {
@@ -116,7 +112,6 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({
       user: authData.user.Username
     });
@@ -147,7 +142,6 @@ export class MainView extends React.Component {
       })
       .then((response) => {
         const data = response.data;
-        console.log(data);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         this.setState({
@@ -158,7 +152,7 @@ export class MainView extends React.Component {
       })
       .catch(response => {
         console.error(response);
-        alert('Unable to unregister');
+        console.log('Unable to unregister');
       });
   }
 
