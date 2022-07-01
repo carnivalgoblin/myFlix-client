@@ -11,5 +11,5 @@ The code for the server-side of this app can be foudn here: https://github.com/c
 
 **Client:** React, Redux, SASS
 
-**Server:** Node, Express
+**Server:** Node, Express, mongoDB
 
