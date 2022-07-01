@@ -46616,6 +46616,7 @@ class MovieCard extends _reactDefault.default.Component {
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                    crossOrigin: "anonymous",
                     variant: "top",
                     src: movieData.ImagePath,
                     className: "card-image",
@@ -47426,6 +47427,7 @@ class MovieView extends _reactDefault.default.Component {
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                                crossOrigin: "anonymous",
                                 className: "poster",
                                 src: movieData.ImagePath,
                                 __source: {
