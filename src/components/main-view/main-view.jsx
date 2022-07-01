@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
@@ -242,6 +243,12 @@ let mapStateToProps = state => {
     user: state.user,
     favorites: state.favorites
   }
+}
+
+MainView.propTypes = {
+  movies: PropTypes.array.isRequired,
+  favorites: PropTypes.array,
+  user: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(MainView);
