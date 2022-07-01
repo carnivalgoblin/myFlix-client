@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser, setFavorites } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 
@@ -18,7 +18,6 @@ import './main-view.scss';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-/* import { MovieCard } from '../movie-card/movie-card'; */
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -27,21 +26,10 @@ import Navigationbar from '../navbar/navbar';
 
 class MainView extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      user: null,
-      favorites: [],
-      registered: true
-    };
-  }
-
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
+      this.props.setUser(localStorage.getItem('user'));
       this.getMovies(accessToken);
       this.getFavorites();
     }
@@ -67,12 +55,10 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      this.setState({
-        favorites: response.data.Favorites
-      });
+      this.props.setFavorites(response.data.Favorites)
     })
     .catch(e => {
-      console.log("Error!")
+      console.log("Error fetching favorites!")
     });
   }
 
@@ -115,26 +101,17 @@ class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    this.setState({
-      user: authData.user.Username
-    });
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
+    const { setUser } = this.props;
+    setUser(authData.user.Username);
     this.getMovies(authData.token);
   }
 
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
-  }
-
-  onRegister(registered) {
-    this.setState({
-      registered
-    });
+    this.props.setUser('');
   }
 
   deregisterUser = (props) => {
@@ -147,9 +124,7 @@ class MainView extends React.Component {
         const data = response.data;
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        this.setState({
-          user: null
-        });
+        this.props.setUser('');
         alert("Your profile has been deleted!");        
         window.open("/", "_self");
       })
@@ -160,9 +135,8 @@ class MainView extends React.Component {
   }
 
   render() {
-    let { movies } = this.props;
-    let { user, favorites } = this.state;
-
+    let { movies, user, favorites } = this.props;
+    
     return (
       <Router>
         <Navigationbar user={user} fixed="top" />
@@ -172,7 +146,7 @@ class MainView extends React.Component {
                 if (!user) return (
                    <> <Col sm={2} md={3} lg={4}></Col>
                       <Col sm={8} md={6} lg={4}>
-                        <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
+                        <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} />
                       </Col>
                       <Col sm={2} md={3} lg={4}></Col>
                     </>
@@ -208,7 +182,7 @@ class MainView extends React.Component {
                   <>
                     <Col sm={2} md={3} lg={3}> </Col>
                     <Col sm={8} md={6} lg={6}>
-                      <RegistrationView onRegister={registered => this.onRegister(registered)} />
+                      <RegistrationView />
                     </Col>
                     <Col sm={2} md={3} lg={3}> </Col>
                   </>
@@ -222,7 +196,7 @@ class MainView extends React.Component {
                 <>
                   <Col sm={2} md={3} lg={4}></Col>
                   <Col sm={8} md={6} lg={4}>
-                    <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
+                    <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} />
                   </Col>
                   <Col sm={2} md={3} lg={4}></Col>
                 </>
@@ -263,7 +237,11 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { 
+    movies: state.movies,
+    user: state.user,
+    favorites: state.favorites
+  }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(MainView);

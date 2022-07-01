@@ -27968,9 +27968,27 @@ function movies(state = [], action) {
             return state;
     }
 }
+function favorites(state = [], action) {
+    switch(action.type){
+        case _actions.SET_FAVORITES:
+            return action.value;
+        default:
+            return state;
+    }
+}
+function user(state = '', action) {
+    switch(action.type){
+        case _actions.SET_USER:
+            return action.value;
+        default:
+            return state;
+    }
+}
 const moviesApp = _redux.combineReducers({
     visibilityFilter,
-    movies
+    movies,
+    user,
+    favorites
 });
 exports.default = moviesApp;
 
@@ -27981,12 +27999,22 @@ parcelHelpers.export(exports, "SET_MOVIES", ()=>SET_MOVIES
 );
 parcelHelpers.export(exports, "SET_FILTER", ()=>SET_FILTER
 );
+parcelHelpers.export(exports, "SET_USER", ()=>SET_USER
+);
+parcelHelpers.export(exports, "SET_FAVORITES", ()=>SET_FAVORITES
+);
 parcelHelpers.export(exports, "setMovies", ()=>setMovies
 );
 parcelHelpers.export(exports, "setFilter", ()=>setFilter
 );
+parcelHelpers.export(exports, "setUser", ()=>setUser
+);
+parcelHelpers.export(exports, "setFavorites", ()=>setFavorites
+);
 const SET_MOVIES = 'SET_MOVIES';
 const SET_FILTER = 'SET_FILTER';
+const SET_USER = 'SET_USER';
+const SET_FAVORITES = 'SET_FAVORITES';
 function setMovies(value) {
     return {
         type: SET_MOVIES,
@@ -27996,6 +28024,18 @@ function setMovies(value) {
 function setFilter(value) {
     return {
         type: SET_FILTER,
+        value
+    };
+}
+function setUser(value) {
+    return {
+        type: SET_USER,
+        value
+    };
+}
+function setFavorites(value) {
+    return {
+        type: SET_FAVORITES,
         value
     };
 }
@@ -28045,27 +28085,17 @@ var _containerDefault = parcelHelpers.interopDefault(_container);
 var _mainViewScss = require("./main-view.scss");
 var _loginView = require("../login-view/login-view");
 var _registrationView = require("../registration-view/registration-view");
-/* import { MovieCard } from '../movie-card/movie-card'; */ var _movieView = require("../movie-view/movie-view");
+var _movieView = require("../movie-view/movie-view");
 var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
 var _navbar1 = require("../navbar/navbar");
 var _navbarDefault1 = parcelHelpers.interopDefault(_navbar1);
 class MainView extends _reactDefault.default.Component {
-    constructor(){
-        super();
-        this.state = {
-            user: null,
-            favorites: [],
-            registered: true
-        };
-    }
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user')
-            });
+            this.props.setUser(localStorage.getItem('user'));
             this.getMovies(accessToken);
             this.getFavorites();
         }
@@ -28090,11 +28120,9 @@ class MainView extends _reactDefault.default.Component {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            this.setState({
-                favorites: response.data.Favorites
-            });
+            this.props.setFavorites(response.data.Favorites);
         }).catch((e)=>{
-            console.log("Error!");
+            console.log("Error fetching favorites!");
         });
     }
     addFavorite = (movie)=>{
@@ -28134,24 +28162,16 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     onLoggedIn(authData) {
-        this.setState({
-            user: authData.user.Username
-        });
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
+        const { setUser  } = this.props;
+        setUser(authData.user.Username);
         this.getMovies(authData.token);
     }
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.setState({
-            user: null
-        });
-    }
-    onRegister(registered) {
-        this.setState({
-            registered
-        });
+        this.props.setUser('');
     }
     deregisterUser = (props)=>{
         let token = localStorage.getItem('token');
@@ -28164,9 +28184,7 @@ class MainView extends _reactDefault.default.Component {
             const data = response.data;
             localStorage.removeItem('user');
             localStorage.removeItem('token');
-            this.setState({
-                user: null
-            });
+            this.props.setUser('');
             alert("Your profile has been deleted!");
             window.open("/", "_self");
         }).catch((response)=>{
@@ -28175,12 +28193,11 @@ class MainView extends _reactDefault.default.Component {
         });
     };
     render() {
-        let { movies  } = this.props;
-        let { user , favorites  } = this.state;
+        let { movies , user , favorites  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 167
+                lineNumber: 141
             },
             __self: this,
             children: [
@@ -28189,21 +28206,21 @@ class MainView extends _reactDefault.default.Component {
                     fixed: "top",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 168
+                        lineNumber: 142
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 169
+                        lineNumber: 143
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                         className: "main-view justify-content-md-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 170
+                            lineNumber: 144
                         },
                         __self: this,
                         children: [
@@ -28226,8 +28243,6 @@ class MainView extends _reactDefault.default.Component {
                                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                                     movies: movies,
                                                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
-                                                    ,
-                                                    onRegister: (registered)=>this.onRegister(registered)
                                                 })
                                             }),
                                             /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -28246,7 +28261,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 171
+                                    lineNumber: 145
                                 },
                                 __self: this
                             }),
@@ -28273,7 +28288,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 186
+                                    lineNumber: 160
                                 },
                                 __self: this
                             }),
@@ -28297,7 +28312,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 195
+                                    lineNumber: 169
                                 },
                                 __self: this
                             }),
@@ -28320,7 +28335,6 @@ class MainView extends _reactDefault.default.Component {
                                                 md: 6,
                                                 lg: 6,
                                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
-                                                    onRegister: (registered)=>this.onRegister(registered)
                                                 })
                                             }),
                                             /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -28334,7 +28348,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 204
+                                    lineNumber: 178
                                 },
                                 __self: this
                             }),
@@ -28361,8 +28375,6 @@ class MainView extends _reactDefault.default.Component {
                                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                                     movies: movies,
                                                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
-                                                    ,
-                                                    onRegister: (registered)=>this.onRegister(registered)
                                                 })
                                             }),
                                             /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -28375,7 +28387,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 217
+                                    lineNumber: 191
                                 },
                                 __self: this
                             }),
@@ -28399,7 +28411,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 231
+                                    lineNumber: 205
                                 },
                                 __self: this
                             }),
@@ -28425,7 +28437,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 240
+                                    lineNumber: 214
                                 },
                                 __self: this
                             }),
@@ -28448,7 +28460,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 249
+                                    lineNumber: 223
                                 },
                                 __self: this
                             })
@@ -28461,11 +28473,15 @@ class MainView extends _reactDefault.default.Component {
 }
 let mapStateToProps = (state)=>{
     return {
-        movies: state.movies
+        movies: state.movies,
+        user: state.user,
+        favorites: state.favorites
     };
 };
 exports.default = _reactRedux.connect(mapStateToProps, {
-    setMovies: _actions.setMovies
+    setMovies: _actions.setMovies,
+    setUser: _actions.setUser,
+    setFavorites: _actions.setFavorites
 })(MainView);
 
   $parcel$ReactRefreshHelpers$35bf.postlude(module);
@@ -34353,10 +34369,10 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRedux = require("react-redux");
-var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
-var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
 var _movieCard = require("../movie-card/movie-card");
 var _moviesListScss = require("./movies-list.scss");
+var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
+var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
 const mapStateToProps = (state)=>{
     const { visibilityFilter  } = state;
     return {
@@ -34372,7 +34388,7 @@ function MoviesList(props) {
         className: "main-view",
         __source: {
             fileName: "src/components/movies-list/movies-list.jsx",
-            lineNumber: 24
+            lineNumber: 23
         },
         __self: this
     }));
@@ -34385,14 +34401,14 @@ function MoviesList(props) {
                 },
                 __source: {
                     fileName: "src/components/movies-list/movies-list.jsx",
-                    lineNumber: 27
+                    lineNumber: 26
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_visibilityFilterInputDefault.default, {
                     visibilityFilter: visibilityFilter,
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
-                        lineNumber: 28
+                        lineNumber: 27
                     },
                     __self: this
                 })
@@ -34403,14 +34419,14 @@ function MoviesList(props) {
                     lg: 4,
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
-                        lineNumber: 31
+                        lineNumber: 30
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
                         movieData: m,
                         __source: {
                             fileName: "src/components/movies-list/movies-list.jsx",
-                            lineNumber: 32
+                            lineNumber: 31
                         },
                         __self: this
                     })
