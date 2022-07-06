@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 function Navigationbar({user}) {
 
@@ -26,7 +27,7 @@ function Navigationbar({user}) {
 		  	  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 		  		  <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
-                {isAuth() && (<Nav.Link href={`/users/${user}`}>{user}</Nav.Link>)}
+                {isAuth() && (<NavLink to={`/users/${user}`} className="nav-link">{user}</NavLink>)}
                 {!isAuth() && (<Nav.Link href='/login'>Sign-in</Nav.Link>)}
                 {!isAuth() && (<Nav.Link href='/register'>Sign-up</Nav.Link>)}
                 {isAuth() && (<Nav.Link onClick={onLogout}>Logout</Nav.Link>)}
