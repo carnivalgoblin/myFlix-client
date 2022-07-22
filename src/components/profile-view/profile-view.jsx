@@ -68,7 +68,6 @@ export function ProfileView({movies, favorites, deregisterUser}) {
       })
       .then(response => {
         const data = response.data;
-        console.log(data);
         alert('Profile has been updated');
         localStorage.setItem('user', data.Username);
         window.open("/", "_self");

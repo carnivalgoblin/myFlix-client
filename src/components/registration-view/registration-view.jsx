@@ -59,7 +59,6 @@ export function RegistrationView() {
       })
       .then(response => {
         const data = response.data;
-        console.log(data);
         alert('Registration successful. Please login!');
         window.open('/', '_self');
       })

@@ -38,7 +38,6 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
-    console.log(username, password);
     // Send a request to the server for autghentication
     if(isReq) {
      axios.post('https://rpflixdb.herokuapp.com/login', {
