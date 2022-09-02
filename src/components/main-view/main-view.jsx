@@ -1,7 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+
+import { setMovies, setUser, setFavorites } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,31 +19,18 @@ import './main-view.scss';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view'; 
-import { Navbar } from '../navbar/navbar';
+import Navigationbar from '../navbar/navbar';
 
-export class MainView extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {
-      movies: [],
-      user: null,
-      favorites: [],
-      registered: true
-    };
-  }
+class MainView extends React.Component {
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
+      this.props.setUser(localStorage.getItem('user'));
       this.getMovies(accessToken);
       this.getFavorites();
     }
@@ -48,9 +42,7 @@ export class MainView extends React.Component {
     })
     .then(response => {
       //Assign the result to the state
-      this.setState({
-        movies: response.data
-      });
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -64,12 +56,10 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      this.setState({
-        favorites: response.data.Favorites
-      });
+      this.props.setFavorites(response.data.Favorites)
     })
     .catch(e => {
-      console.log("Error!")
+      console.log("Error fetching favorites!")
     });
   }
 
@@ -81,8 +71,6 @@ export class MainView extends React.Component {
     })
     .then(response => {
       const data = response.data;
-      console.log(data);
-      alert(`${movie.Title} has been added to your list of favorite movies.`);
       this.getFavorites();
     })
     .catch(e => {
@@ -99,8 +87,6 @@ export class MainView extends React.Component {
     })
     .then(response => {
       const data = response.data;
-      console.log(data);
-      alert(`${movie.Title} has been removed from your list of favorites.`);
       this.getFavorites();
     })
     .catch(e => {
@@ -116,27 +102,17 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
+    const { setUser } = this.props;
+    setUser(authData.user.Username);
     this.getMovies(authData.token);
   }
 
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
-  }
-
-  onRegister(registered) {
-    this.setState({
-      registered
-    });
+    this.props.setUser('');
   }
 
   deregisterUser = (props) => {
@@ -147,34 +123,31 @@ export class MainView extends React.Component {
       })
       .then((response) => {
         const data = response.data;
-        console.log(data);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        this.setState({
-          user: null
-        });
+        this.props.setUser('');
         alert("Your profile has been deleted!");        
         window.open("/", "_self");
       })
       .catch(response => {
         console.error(response);
-        alert('Unable to unregister');
+        console.log('Unable to unregister');
       });
   }
 
   render() {
-    const { movies, user, favorites } = this.state;
-
+    let { movies, user, favorites } = this.props;
+    
     return (
       <Router>
-        <Navbar user={user} fixed="top" onLoggedOut={() => this.onLoggedOut()} />
+        <Navigationbar user={user} fixed="top" />
         <Container>
             <Row className="main-view justify-content-md-center">
               <Route exact path="/" render={() => {
                 if (!user) return (
                    <> <Col sm={2} md={3} lg={4}></Col>
                       <Col sm={8} md={6} lg={4}>
-                        <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
+                        <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} />
                       </Col>
                       <Col sm={2} md={3} lg={4}></Col>
                     </>
@@ -182,11 +155,7 @@ export class MainView extends React.Component {
 
                 if (movies.length === 0) return <div className="main-view" />;
 
-                return movies.map(m => (
-                  <Col sm={12} md={6} lg={4} key={m._id}>
-                    <MovieCard movieData={m} />
-                  </Col>
-                ))
+                return <MoviesList movies={movies} />;
               }} />
 
               <Route path="/movies/:movieId" render={({ match, history }) => {
@@ -214,7 +183,7 @@ export class MainView extends React.Component {
                   <>
                     <Col sm={2} md={3} lg={3}> </Col>
                     <Col sm={8} md={6} lg={6}>
-                      <RegistrationView onRegister={registered => this.onRegister(registered)} />
+                      <RegistrationView />
                     </Col>
                     <Col sm={2} md={3} lg={3}> </Col>
                   </>
@@ -228,7 +197,7 @@ export class MainView extends React.Component {
                 <>
                   <Col sm={2} md={3} lg={4}></Col>
                   <Col sm={8} md={6} lg={4}>
-                    <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} onRegister={registered => this.onRegister(registered)} />
+                    <LoginView movies={movies} onLoggedIn={user => this.onLoggedIn(user)} />
                   </Col>
                   <Col sm={2} md={3} lg={4}></Col>
                 </>
@@ -267,3 +236,19 @@ export class MainView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return { 
+    movies: state.movies,
+    user: state.user,
+    favorites: state.favorites
+  }
+}
+
+MainView.propTypes = {
+  movies: PropTypes.array.isRequired,
+  favorites: PropTypes.array,
+  user: PropTypes.string.isRequired
+}
+
+export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(MainView);
