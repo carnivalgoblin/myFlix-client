@@ -6,10 +6,26 @@ get information about different directors and movie genres, they will also be ab
 
 This app is a SPA built with React.
 
-The code for the server-side of this app can be foudn here: https://github.com/carnivalgoblin/movie_api
+The code for the server-side of this app can be found here: https://github.com/carnivalgoblin/movie_api
+
+![myFlix_App_Image](src/react-myflix.png)
+
 ## Tech Stack
 
-**Client:** React, Redux, SASS
+**Client:** React, Redux, SASS, Axios
 
 **Server:** Node, Express, mongoDB
+
+## Installation
+
+Required installation to get started with the App, follow these steps.
+
+Clone the repo
+`git clone https://github.com/leevee6039/myFlix-client.git`
+
+Install NPM packages
+`npm install`
+
+Start the app
+`npm run start`
 
