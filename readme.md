@@ -6,6 +6,10 @@ get information about different directors and movie genres, they will also be ab
 
 This app is a SPA built with React.
 
+This app is hosted on Netlify: https://rpmyflix.netlify.app/
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/29afc444-8897-48b5-90a2-0c317b45e050/deploy-status)](https://app.netlify.com/sites/rpmyflix/deploys)
+
 The code for the server-side of this app can be found here: https://github.com/carnivalgoblin/movie_api
 
 ![myFlix_App_Image](src/react-myflix.png)
