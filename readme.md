@@ -13,6 +13,7 @@ This app is hosted on Netlify: https://rpmyflix.netlify.app/
 The code for the server-side of this app can be found here: https://github.com/carnivalgoblin/movie_api
 
 ![myFlix_App_Image](src/react-myflix.png)
+![myFlix_App_Image](src/myFlix-mobile.png)
 
 ## Tech Stack
 
@@ -25,7 +26,7 @@ The code for the server-side of this app can be found here: https://github.com/c
 Required installation to get started with the App, follow these steps.
 
 Clone the repo
-`git clone https://github.com/leevee6039/myFlix-client.git`
+`git clone https://github.com/carnivalgoblin/myFlix-client.git`
 
 Install NPM packages
 `npm install`
